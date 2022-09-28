@@ -25,12 +25,12 @@ More concretely, graphs can be represented in code using an adjacency matrix and
 
 For example, the above graph would be represented as below:
 
-|       | **1** | **2** | **3** | **4** |
+|       | **0** | **1** | **2** | **3** |
 |-------|-------|-------|-------|-------|
-| **1** | 0     | 0     | 1     | 1     |
-| **2** | 1     | 0     | 0     | 1     |
-| **3** | 0     | 0     | 0     | 1     |
-| **4** | 0     | 0     | 0     | 0     |
+| **0** | 0     | 0     | 1     | 1     |
+| **1** | 1     | 0     | 0     | 1     |
+| **2** | 0     | 0     | 0     | 1     |
+| **3** | 0     | 0     | 0     | 0     |
 
 Adjacency matrices require $O(N^2)$ memory which can sometimes be impractical. Thus, unless graphs are dense and require $O(N^2)$ memory regardless, they are usually represented by adjacency lists instead. 
 
@@ -40,10 +40,10 @@ Adjacency matrices require $O(N^2)$ memory which can sometimes be impractical. T
 
 | _Node_ | _Outward Edges_ |
 |--------|-----------------|
-| **1**  | 3, 4            |
-| **2**  | 1, 4            |
-| **3**  | 4               |
-| **4**  |                 |
+| **0**  | 2, 3            |
+| **1**  | 0, 3            |
+| **2**  | 3               |
+| **3**  |                 |
 
 Adjacency lists require $O(E)$ memory. However, a downside is that querying edge information in a vanilla adjacency list requires $O(N)$, as worst case scenario you have to search through all of a node's edges until you find the one you are looking for. 
 
@@ -52,22 +52,8 @@ Adjacency lists require $O(E)$ memory. However, a downside is that querying edge
 
 For practice, we suggest that readers implement the two different data structures for storing graphs. 
 
-More formally, please write a function which initializes the data structure. Then, please implement the appropriate operations to represent the above graph with the data-structure. 
+More formally, please write a function which initializes each data structure. Then, please implement the appropriate operations to represent the above graph with the data-structure. 
 1. Adjacency Matrix
-
-<details>
-<summary>Click here for the solution: </summary>
-
-Java:
-```
-```
-
-Python:
-```
-```
-
-</details>
-
 2. Adjacency List
 
 <details>
@@ -75,10 +61,223 @@ Python:
 
 Java:
 ```
+import java.io.*;
+import java.util.*;
+
+class AdjacencyMatrix{
+    // An Adjacency Matrix for storing directed, unweighted graphs
+    int n;
+    boolean[][] arr;
+
+    public AdjacencyMatrix(int numberNodes){
+        // Creates a new instance for n nodes, indexed 0
+        this.arr = new boolean[numberNodes][numberNodes];
+        this.n = numberNodes;
+    }
+
+    public boolean getEdge(int u, int v){
+        // Gets the edge between nodes u and v, if possible
+        assert(u>=0 && u<this.n && v>=0 && v<this.n);
+
+        return this.arr[u][v];
+    }
+
+    public void addEdge(int u, int v){
+        // Adds an edge between nodes u and v, if possible
+        assert(u>=0 && u<this.n && v>=0 && v<this.n);
+
+        this.arr[u][v] = true;
+    }
+
+    public void removeEdge(int u, int v){
+        // Removes the edge between nodes u and v, if possible
+        assert(u>=0 && u<this.n && v>=0 && v<this.n);
+
+        this.arr[u][v] = false;
+    }
+
+    public void printGraph(){
+        // Prints graph, if possible
+        assert(this.arr != null);
+
+        for(int i = 0; i<this.arr.length; ++i){
+            System.out.println(Arrays.toString(this.arr[i]));
+        }
+    }
+}
+
+class AdjacencyList{
+    // An Adjacency List for storing directed, unweighted graphs
+    int n;
+    ArrayList<Integer>[] lst;
+
+    public AdjacencyList(int numberNodes){
+        // Creates a new instance for n nodes, indexed 0
+        this.lst = new ArrayList[numberNodes];
+        for(int i = 0; i<numberNodes; ++i){
+            this.lst[i] = new ArrayList<Integer>();
+        }
+        this.n = numberNodes;
+    }
+
+    public boolean getEdge(int u, int v){
+        // Gets the edge between nodes u and v, if possible
+        assert(u>=0 && u<this.n && v>=0 && v<this.n);
+
+        return this.lst[u].contains(v);
+    }
+
+    public void addEdge(int u, int v){
+        // Adds an edge between nodes u and v, if possible
+        assert(u>=0 && u<this.n && v>=0 && v<this.n);
+
+        this.lst[u].add(v);
+    }
+
+    public void removeEdge(int u, int v){
+        // Removes the edge between nodes u and v, if possible
+        assert(u>=0 && u<this.n && v>=0 && v<this.n);
+
+        this.lst[u].remove(Integer.valueOf(v));
+    }
+
+    public void printGraph(){
+        // Prints graph, if possible
+        for(int i = 0; i<this.n; ++i){
+            assert(this.lst[i] != null);
+            System.out.println(Integer.toString(i) + ": " + this.lst[i].toString());
+        }
+    }
+}
+
+public class IntroductionToGraphs {
+    public static void main(String[] args) throws IOException{
+        // Initialize Adjacency Matrix
+        AdjacencyMatrix graphMat = new AdjacencyMatrix(4);
+
+        // Add Edges
+        graphMat.addEdge(0, 2);
+        graphMat.addEdge(0, 3);
+        graphMat.addEdge(1, 0);
+        graphMat.addEdge(1, 3);
+        graphMat.addEdge(2, 3);
+
+        // Print Final Graph
+        graphMat.printGraph();
+
+        // Initialize Adjacency Matrix
+        AdjacencyList graphList = new AdjacencyList(4);
+
+        // Add Edges
+        graphList.addEdge(0, 2);
+        graphList.addEdge(0, 3);
+        graphList.addEdge(1, 0);
+        graphList.addEdge(1, 3);
+        graphList.addEdge(2, 3);
+
+        // Print Final Graph
+        graphList.printGraph();
+    }
+}
 ```
 
 Python:
 ```
+class AdjacencyMatrix:
+    # An Adjacency Matrix for storing directed, unweighted graphs
+    n = 0
+    arr = None
+
+    def __init__(self, numberNodes):
+        # Creates a new instance for n nodes, indexed 0
+        self.arr = [[False]*numberNodes for i in range(numberNodes)]
+        self.n = numberNodes
+
+    def getEdge(self, u, v):
+        # Gets the edge between nodes u and v, if possible
+        assert(u>=0 and u<self.n and v>=0 and v<self.n)
+
+        return self.arr[u][v]
+
+    def addEdge(self, u, v):
+        # Adds an edge between nodes u and v, if possible
+        assert(u>=0 and u<self.n and v>=0 and v<self.n)
+
+        self.arr[u][v] = True
+
+    def removeEdge(self, u, v):
+        # Removes the edge between nodes u and v, if possible
+        assert(u>=0 and u<self.n and v>=0 and v<self.n)
+
+        self.arr[u][v] = False
+
+    def printGraph(self):
+        # Prints graph, if possible
+        assert(self.arr != None)
+
+        for i in range(self.n):
+            print(self.arr[i])
+
+class AdjacencyList:
+    # An Adjacency List for storing directed, unweighted graphs
+    n = 0
+    lst = None
+
+    def __init__(self, numberNodes):
+        # Creates a new instance for n nodes, indexed 0
+        self.lst = [[] for i in range(numberNodes)]
+        self.n = numberNodes
+
+    def getEdge(self, u, v):
+        # Gets the edge between nodes u and v, if possible
+        assert(u>=0 and u<self.n and v>=0 and v<self.n)
+
+        return v in self.lst[u]
+
+    def addEdge(self, u, v):
+        # Adds an edge between nodes u and v, if possible
+        assert(u>=0 and u<self.n and v>=0 and v<self.n)
+
+        self.lst[u].append(v)
+
+    def removeEdge(self, u, v):
+        # Removes the edge between nodes u and v, if possible
+        assert(u>=0 and u<self.n and v>=0 and v<self.n)
+
+        self.lst[u].remove(v)
+
+    def printGraph(self):
+        # Prints graph, if possible
+        for i in range(self.n):
+            assert(self.lst[i] != None)
+            print(i,  ":", self.lst[i])
+
+# Initialize Adjacency Matrix
+graphMat = AdjacencyMatrix(4)
+
+# Add Edges
+graphMat.addEdge(0, 2)
+graphMat.addEdge(0, 3)
+graphMat.addEdge(1, 0)
+graphMat.addEdge(1, 3)
+graphMat.addEdge(2, 3)
+
+# Print Final Graph
+graphMat.printGraph()
+
+# Initialize Adjacency Matrix
+graphList = AdjacencyList(4)
+
+# Add Edges
+graphList.addEdge(0, 2)
+graphList.addEdge(0, 3)
+graphList.addEdge(1, 0)
+graphList.addEdge(1, 3)
+graphList.addEdge(2, 3)
+
+# Print Final Graph
+graphList.printGraph()
+
 ```
 
 </details>
