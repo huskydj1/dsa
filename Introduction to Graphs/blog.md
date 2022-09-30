@@ -88,6 +88,7 @@ For practice, we suggest that readers implement the two different data structure
 More formally, please write a function which initializes each data structure:
 1. Adjacency Matrix
 2. Adjacency List
+
  Then, please implement the below operations for each data-structure:
  1. Initialize
  2. Get an edge
