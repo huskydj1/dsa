@@ -1,4 +1,4 @@
-import unittest
+import unittest # Python's unittest library allows you to test classes' functions all by one running one file with a nice terminal UI, https://docs.python.org/3/library/unittest.html
 import random
 
 from linked_list import LinkedList
