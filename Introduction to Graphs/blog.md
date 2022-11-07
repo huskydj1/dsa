@@ -2,7 +2,8 @@
 
 Graphs represent things and their relationships to other things. In the language of [graph theory](https://www.tutorialspoint.com/graph_theory/graph_theory_introduction.htm), things are called nodes, and relationships between nodes are called edges. These structures are used to model many real-life systems, including road networks, protein interactions, and social networks. For example, on Instagram, users could be represented as nodes, and two friends could have an edge connecting them to represent their relationship.
 
-![A network of buildings and roads represented as a graph](images/Road%20Network.webp)
+![A network of buildings and roads represented as a graph](https://postimg.cc/w1VTJfwG)
+![Graph Representation](https://postimg.cc/67kSQwdJ)
 *A real [road network](https://transportgeography.org/contents/methods/graph-theory-definition-properties/graph-representation-real-network/) can be modelled using a graph. Here, buildings are nodes and streets are edges.*
 
 <br>
@@ -13,7 +14,7 @@ Graphs represent things and their relationships to other things. In the language
 
 An edge between two nodes can have a weight. A weight is a quantitative value associated with the edge. For example, in road networks, edge weights often indicate the distance between two locations or nodes. Edges in social networks are often unweighted because a user following another user should have the same importance regardless of who is involved.
 
-![An unweighted edge and a weighted edge](images/Weighted%20Edge.svg)
+![An unweighted edge and a weighted edge](https://postimg.cc/87rxgj6B)
 
 <br>
 
@@ -33,7 +34,7 @@ Answer - Unweighted edges are equivalent to having the same weight on all edges,
 
 Two ways to represent a graph in code are an [adjacency matrix](https://www.javatpoint.com/what-is-an-adjacency-matrix) and an [adjacency list](https://www.programiz.com/dsa/graph-adjacency-list). The following examples are based on the graph below. This is a directed, unweighted graph because there are one-way edges and no edge has an associated weight.
 
-![A directed, unweighted graph with four nodes](images/Graph%20Example.png)
+![A directed, unweighted graph with four nodes](https://postimg.cc/30v2x5C6)
 
 <br>
 
